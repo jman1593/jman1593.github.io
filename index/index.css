@@ -15,7 +15,7 @@ body {
     background-color: rgba(50, 50, 50, 0.9);
     backdrop-filter: blur(10px);
     color: white;
-    padding: 15px 30px;
+    padding: 1~5px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
