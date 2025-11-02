@@ -1,1 +1,0 @@
-export async function fetchGameData(){try{const r=await fetch('./index/games.json');if(!r.ok)throw new Error(`HTTP error! status: ${r.status}`);const games=await r.json();return games}catch(e){console.error("Failed to load game data:",e);return[]}}

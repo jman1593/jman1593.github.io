@@ -1,5 +1,6 @@
-import { fetchGameData } from "./index/gamehandler.js";
-import { targetUrl } from "./appscript.js";
+import { fetchGameData } from "../GameManager/gamehandler.js";
+import { targetUrl } from "../appscript.js";
+let games = [];
 function getTierAndProgressFromXP(xp) {
     const baseXPNeeded = 50,
         increasePerTier = 200,
@@ -522,3 +523,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 (faviconInput.value = defaultFavicon);
         });
 })();
+
+async function initializeGameData() {
+    games = await fetchGameData();
+    const allListElement = document.getElementById("allList");
+    allListElement.innerHTML = games.map(g => getCardHTML(g)).join("");
+    const searchInput = document.getElementById("searchInput");
+    searchInput.placeholder = `Search ${games.length} games...`;
+    const searchResults = document.getElementById("searchResults");
+    if (searchInput && searchResults) {
+        searchInput.addEventListener("focus", updateSearchResults),
+            searchInput.addEventListener("input", updateSearchResults),
+            document.addEventListener("click", ev => {
+                if (!searchInput.contains(ev.target) && !searchResults.contains(ev.target))
+                    searchResults.style.display = "none";
+            });
+    }
+    fetchTopGames();
+    favoritesToggle.checked && loadFavorites();
+    const savedSize = getCookie("cardSize");
+    savedSize !== "" && ((cardSizeSlider.value = savedSize), updateCardSizes());
+}
+
+initializeGameData();
