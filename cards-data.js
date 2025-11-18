@@ -1,4 +1,5 @@
 export default [
+  { href: './html/Speed Stars/index.html', imgSrc: 'speed stars.jpeg', name: 'Speed Stars' , 'page': 5, 'id': 970 },
   { href: './html/Stickman Clash/index.html', imgSrc: 'stickman clash.jpeg', name: 'Stickman Clash' , 'page': 5, 'id': 978 },
   { href: './html/Sticky Sorcerer/index.html', imgSrc: 'sticky sorcerer.png', name: 'Sticky Sorcerer' , 'page': 5, 'id': 979 },
   { href: './html/Supermarioplay/index.html', imgSrc: 'supermarioplay.jpeg', name: 'Supermarioplay' , 'page': 5, 'id': 981 },
