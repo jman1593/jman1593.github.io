@@ -2,7 +2,6 @@ export default [
 { href: './html/Buckshot Roulette/index.html', imgSrc: 'buckshot roulette.jpeg', name: 'Buckshot Roulette' , 'page': 5, 'id': 763 },
 { href: './html/Killer/index.html', imgSrc: 'Killer.jpg', name: 'Killer' , 'page': 5, 'id': 901 },
 { href: './html/Hollow knight degraded/index.html', imgSrc: 'hollow knight degraded.jpeg', name: 'Hollow knight degraded' , 'page': 5, 'id': 874 },
-{ href: './html/Hasty shaman/index.html', imgSrc: 'hasty shaman.jpeg', name: 'Hasty shaman' , 'page': 5, 'id': 867 },
 { href: './html/Greedy Mimic/index.html', imgSrc: 'greedy mimic.jpeg', name: 'Greedy Mimic' , 'page': 5, 'id': 859 },
 { href: './html/Golf Orbit/index.html', imgSrc: 'golf orbit.jpeg', name: 'Golf Orbit' , 'page': 5, 'id': 841 },
 { href: './html/Fabled Conquerors/index.html', imgSrc: 'fabled conquerors.jpeg', name: 'Fabled Conquerors' , 'page': 5, 'id': 811 },
