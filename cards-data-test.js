@@ -1,6 +1,5 @@
 export default [
 { href: './html/Buckshot Roulette/index.html', imgSrc: 'buckshot roulette.jpeg', name: 'Buckshot Roulette' , 'page': 5, 'id': 763 },
-{ href: './html/Sticky Sorcerer/index.html', imgSrc: 'sticky sorcerer.png', name: 'Sticky Sorcerer' , 'page': 5, 'id': 979 },
 { href: './html/Stickman Clash/index.html', imgSrc: 'stickman clash.jpeg', name: 'Stickman Clash' , 'page': 5, 'id': 978 },
 { href: './html/Speed Stars/index.html', imgSrc: 'speed stars.jpeg', name: 'Speed Stars' , 'page': 5, 'id': 970 },
 { href: './html/Sonic Revert/index.html', imgSrc: 'sonic revert.jpeg', name: 'Sonic Revert' , 'page': 5, 'id': 965 },
