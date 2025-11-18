@@ -44,7 +44,6 @@ export default [
 { href: './html/Capybara clicker/index.html', imgSrc: 'capybara clicker.jpeg', name: 'Capybara clicker' , 'page': 5, 'id': 777 },
 { href: './html/Burnin rubber/index.html', imgSrc: 'Burnin rubber.jpeg', name: 'Burnin rubber' , 'page': 5, 'id': 772 },
 { href: './html/Buildnow.gg/index.html', imgSrc: 'buildnow.gg.jpeg', name: 'Buildnow.gg' , 'page': 5, 'id': 768 },
-{ href: './html/Buckshot Roulette/index.html', imgSrc: 'buckshot roulette.jpeg', name: 'Buckshot Roulette' , 'page': 5, 'id': 763 },
 { href: './html/Boxing Random/index.html', imgSrc: 'boxing random.jpeg', name: 'Boxing Random' , 'page': 5, 'id': 761 },
 { href: './html/Blacktop Police Chase/index.html', imgSrc: 'blacktop police chase.jpeg', name: 'Blacktop Police Chase' , 'page': 5, 'id': 751 },
 { href: './html/Baseball Bros/index.html', imgSrc: 'baseball bros.jpeg', name: 'Baseball Bros' , 'page': 5, 'id': 749 },
