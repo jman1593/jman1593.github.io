@@ -1,4 +1,5 @@
 export default [
+  { href: './html/Snow Rider 3d/index.html', imgSrc: 'snow rider 3d.jpeg', name: 'Snow Rider 3d' , 'page': 5, 'id': 961 },
   { href: './html/Sonic Revert/index.html', imgSrc: 'sonic revert.jpeg', name: 'Sonic Revert' , 'page': 5, 'id': 965 },
   { href: './html/Speed Stars/index.html', imgSrc: 'speed stars.jpeg', name: 'Speed Stars' , 'page': 5, 'id': 970 },
   { href: './html/Stickman Clash/index.html', imgSrc: 'stickman clash.jpeg', name: 'Stickman Clash' , 'page': 5, 'id': 978 },
