@@ -5,7 +5,6 @@ export default [
 { href: './html/Fabled Conquerors/index.html', imgSrc: 'fabled conquerors.jpeg', name: 'Fabled Conquerors' , 'page': 5, 'id': 811 },
 { href: './html/Escaping the prison/index.html', imgSrc: 'escaping the prison.jpeg', name: 'Escaping the prison' , 'page': 5, 'id': 810 },
 { href: './html/DOOM/index.html', imgSrc: 'doom.jpeg', name: 'DOOM' , 'page': 5, 'id': 795 },
-{ href: './html/Capybara clicker/index.html', imgSrc: 'capybara clicker.jpeg', name: 'Capybara clicker' , 'page': 5, 'id': 777 },
 { href: './html/Burnin rubber/index.html', imgSrc: 'Burnin rubber.jpeg', name: 'Burnin rubber' , 'page': 5, 'id': 772 },
 { href: './html/Buildnow.gg/index.html', imgSrc: 'buildnow.gg.jpeg', name: 'Buildnow.gg' , 'page': 5, 'id': 768 },
 { href: './html/Blacktop Police Chase/index.html', imgSrc: 'blacktop police chase.jpeg', name: 'Blacktop Police Chase' , 'page': 5, 'id': 751 },
