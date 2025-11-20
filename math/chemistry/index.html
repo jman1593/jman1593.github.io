@@ -1,0 +1,190 @@
+<html>
+<head>
+  <title>Interactive 3D Periodic Table</title>
+  <script src="js/three.min.js"></script>
+  <script src="js/tween.umd.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="info">
+  <h2 style="margin: 0 0 10px 0; font-weight: 400;">Interactive 3D Periodic Table</h2>
+  <div>Click on an element to view its atomic structure</div>
+  <div><i class="material-icons" style="font-size: 16px; vertical-align: middle;">pan_tool</i> Hold Shift for Free Cam</div>
+  <div onclick="resetCam();"><i class="material-icons" style="font-size: 16px; vertical-align: middle;">refresh</i> Reset Camera</div>
+</div>
+
+<div class="menu-container">
+  <button class="hamburger-menu" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="dropdown-menu" id="dropdownMenu">
+    <button class="menu-item" onclick="showTrendsMenu()">
+      <i class="material-icons">trending_up</i>
+      Periodic Trends
+    </button>
+    <button class="menu-item" onclick="window.location.href='vsepr'">
+      <i class="material-icons">science</i>
+      VSEPR
+    </button>
+    <button class="menu-item" onclick="window.location.href='intermolecular_forces'">
+      <i class="material-icons">science</i>
+      IMFs
+    </button>
+  </div>
+</div>
+
+<div id="trendsMenu" class="trends-menu">
+  <button class="trend-item" onclick="openTab(event, 'atomicRadius')">Atomic Radius</button>
+  <button class="trend-item" onclick="openTab(event, 'ionizationEnergy')">Ionization Energy</button>
+  <button class="trend-item" onclick="openTab(event, 'electronegativity')">Electronegativity</button>
+  <button class="trend-item" onclick="openTab(event, 'reactivity')">Reactivity</button>
+</div>
+
+<div id="elementInfo"></div>
+
+<div id="controls">
+  <button id="electronSpeedButton" onclick="toggleElectronMovement()">
+    <i class="material-icons">speed</i> Dynamic Electron Movement: Off
+  </button>
+</div>
+
+<div id="tabContainer">
+  <div class="tabs">
+    <button class="tab" onclick="openTab(event, 'atomicRadius')">Atomic Radius</button>
+    <button class="tab" onclick="openTab(event, 'ionizationEnergy')">Ionization Energy</button>
+    <button class="tab" onclick="openTab(event, 'electronegativity')">Electronegativity</button>
+    <button class="tab" onclick="openTab(event, 'reactivity')">Reactivity</button>
+  </div>
+  
+  <div id="atomicRadius" class="tabContent">
+    <button class="closeButton" onclick="closeAllTabs()"><i class="material-icons">close</i></button>
+    <h3>Atomic Radius</h3>
+    <p>Atomic radius generally decreases across a period (from left to right) due to increasing nuclear charge pulling electrons closer to the nucleus. It increases down a group due to additional electron shells.</p>
+    <div class="compareElements">
+      <div class="elementBox">
+        <h4>Lithium (Li)</h4>
+        <p>Atomic Radius: 152 pm</p>
+        <p>Larger atomic radius due to fewer protons and only 2 electron shells.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Li')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Fluorine (F)</h4>
+        <p>Atomic Radius: 72 pm</p>
+        <p>Smaller radius despite same electron shells as Li because 9 protons pull electrons more tightly.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('F')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Potassium (K)</h4>
+        <p>Atomic Radius: 227 pm</p>
+        <p>Larger radius than Li due to additional electron shell, despite more protons.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('K')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="ionizationEnergy" class="tabContent">
+    <button class="closeButton" onclick="closeAllTabs()"><i class="material-icons">close</i></button>
+    <h3>Ionization Energy</h3>
+    <p>Ionization energy generally increases across a period and decreases down a group. Higher ionization energy means electrons are harder to remove from the atom.</p>
+    <div class="compareElements">
+      <div class="elementBox">
+        <h4>Sodium (Na)</h4>
+        <p>Ionization Energy: 496 kJ/mol</p>
+        <p>Lower ionization energy due to the outer electron being farther from nucleus.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Na')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Neon (Ne)</h4>
+        <p>Ionization Energy: 2081 kJ/mol</p>
+        <p>High ionization energy due to stable filled shell configuration.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Ne')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Magnesium (Mg)</h4>
+        <p>Ionization Energy: 738 kJ/mol</p>
+        <p>Higher than Na but lower than Ne, showing the periodic trend.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Mg')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="electronegativity" class="tabContent">
+    <button class="closeButton" onclick="closeAllTabs()"><i class="material-icons">close</i></button>
+    <h3>Electronegativity</h3>
+    <p>Electronegativity increases across a period and decreases down a group. It measures an atom's ability to attract electrons in a chemical bond.</p>
+    <div class="compareElements">
+      <div class="elementBox">
+        <h4>Carbon (C)</h4>
+        <p>Electronegativity: 2.55</p>
+        <p>Moderate electronegativity makes carbon versatile in forming bonds.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('C')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Fluorine (F)</h4>
+        <p>Electronegativity: 3.98</p>
+        <p>Highest electronegativity of all elements, creates strong polar bonds.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('F')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Chlorine (Cl)</h4>
+        <p>Electronegativity: 3.16</p>
+        <p>Lower than F but still high, demonstrating the decrease down a group.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Cl')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="reactivity" class="tabContent">
+    <button class="closeButton" onclick="closeAllTabs()"><i class="material-icons">close</i></button>
+    <h3>Reactivity</h3>
+    <p>Reactivity varies across the periodic table with alkali metals and halogens being highly reactive. Noble gases are least reactive due to their stable electron configurations.</p>
+    <div class="compareElements">
+      <div class="elementBox">
+        <h4>Potassium (K)</h4>
+        <p>Very reactive metal that reacts violently with water, easily losing its outer electron.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('K')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Bromine (Br)</h4>
+        <p>Reactive halogen that readily gains electrons to achieve stable configuration.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Br')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+      <div class="elementBox">
+        <h4>Argon (Ar)</h4>
+        <p>Virtually unreactive noble gas with filled outer shell, requiring extreme conditions to form compounds.</p>
+        <button class="viewModelBtn" onclick="showComparisonModel('Ar')">
+          <i class="material-icons">3d_rotation</i> View 3D Model
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

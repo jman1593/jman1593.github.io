@@ -1,0 +1,1241 @@
+/* Modern Color Scheme */
+:root {
+  --primary: #2196F3;
+  --primary-light: #424769;
+  --primary-dark: #1B1F3B;
+  --secondary: #03A9F4;
+  --accent: #00BCD4;
+  --accent-light: #FFD4B2;
+  --text-primary: #2c3e50;
+  --text-secondary: #546e7a;
+  --background: #f5f7fa;
+  --surface: #ffffff;
+  --surface-light: #3D3D5A;
+  --error: #f44336;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --info: #2196f3;
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+/* Base Styles */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+/* Interactive Elements */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Panels and Cards */
+.panel {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.panel:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation */
+.nav-item {
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.nav-item:hover {
+  background-color: var(--surface-light);
+  color: var(--accent);
+}
+
+/* Icons and Buttons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background-color: var(--surface-light);
+  transform: scale(1.1);
+}
+
+/* Form Elements */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--surface-light);
+  border-radius: var(--border-radius);
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(249, 177, 122, 0.2);
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Existing Styles with Updates */
+#babcanv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  outline: none;
+}
+
+#title {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  text-shadow: 3px 3px 0 var(--accent), 6px 6px 0 var(--primary);
+  text-align: center;
+  margin: 20px 0;
+  z-index: 99999999;
+}
+
+/* Panel Styles */
+.sContent {
+  max-width: 90%;
+  vertical-align: baseline;
+  font-size: calc(0.75vw + 0.75vh) !important;
+  color: var(--text-primary);
+}
+
+.sTitle {
+  font-size: calc(1vw + 1vh) !important;
+  margin-left: 2vw;
+  color: var(--accent);
+}
+
+.cd-panel__close {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cd-panel__close:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* Stats Display */
+.statsdom {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: var(--surface);
+  border-radius: 0 0 0 var(--border-radius);
+  padding: 0.5rem;
+}
+
+/* Loading Screen */
+#babylonjsLoadingDiv {
+  z-index: 9999 !important;
+  background-color: var(--background);
+  color: var(--text-primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loading-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  animation: spin 2s linear infinite;
+}
+
+.loading-text {
+  font-size: 18px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+  }
+  
+  .panel {
+    padding: 1rem;
+  }
+}
+
+@font-face {
+    font-family: "amazon-ember";
+    src: URL("Amazon-Ember-Medium.ttf") format("truetype");
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#babcanv {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    outline: none;
+}
+
+.swal2-container::-webkit-scrollbar {
+    display: none;
+}
+
+.swal2-popup {
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
+
+#bottom-right-image {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
+    background-image: url("../images/biosim-transparent.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 9999;
+}
+
+#title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #ff6b6b, 6px 6px 0 #556270;
+    text-align: center;
+    margin: 20px 0;
+    z-index: 99999999;
+}
+
+#babcanv:hover {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+#babcanv:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.largeBtn {
+    position: absolute;
+    z-index: 100;
+    border: none;
+    border-radius: 6px;
+    font-family: "amazon-ember";
+    font-size: calc(0.65vw + 0.65vh);
+    /* animation: largePulse 1.3s ease infinite; */
+}
+
+#backcell {
+    left: 5vh;
+    top: 0vw;
+    opacity: 0;
+}
+
+#backcell:hover {
+    cursor: pointer;
+}
+
+#backHuman {
+    /* animation: animbtn 1.3s ease forwards !important; */
+    left: 6vh;
+    opacity: 1;
+}
+
+#backBrain {
+    left: 8vh;
+    opacity: 1;
+}
+
+#backHuman:hover {
+    cursor: pointer;
+}
+
+.smlbtns {
+    z-index: 99999999;
+    font-family: "amazon-ember";
+    font-size: calc(0.65vw + 0.65vh);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s !important;
+}
+
+.corneabtns {
+    z-index: 99999999;
+    font-family: "amazon-ember";
+    font-size: calc(0.25vw + 0.25vh);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s !important;
+    width: 2vmin !important;
+    height: 2vmin !important;
+}
+
+#memb {
+    left: 37vw;
+    top: 12vh;
+}
+
+#phospho {
+    left: 49vw;
+    top: 28vh;
+}
+
+#channeltransport {
+    left: 44vw;
+    top: 38vh;
+}
+
+.receptorgifs {
+    width: 30vmin;
+    height: 30vmin;
+    margin: 10px;
+}
+
+.animbtn.pulse {
+    animation: animbtn 1.3s ease forwards, largePulse 1.3s ease infinite !important;
+}
+
+.animbtn {
+    animation: animbtn 1.3s ease forwards;
+}
+
+.animobtn {
+    cursor: default !important;
+    animation: animobtn 1.3s ease forwards;
+}
+
+@keyframes largePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes animbtn {
+    0% {
+        opacity: 0;
+        display: block;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animobtn {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#phospho2 {
+    left: 55vw;
+    top: 36vh;
+}
+
+#cholestrol {
+    left: 52vw;
+    top: 32vh;
+}
+
+#receptorprotein {
+    left: 37vw;
+    top: 38vh;
+}
+
+#bowman {
+    left: 41.75vw;
+    top: 42.5vh;
+}
+
+#epithelium {
+    left: 54.85vw;
+    top: 39vh;
+}
+
+#stroma {
+    left: 48vw;
+    top: 45vh;
+}
+
+#descement {
+    left: 53.75vw;
+    top: 58vh;
+}
+
+#endothelium {
+    left: 58vw;
+    top: 55vh;
+}
+
+.statsdom {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+#babylonjsLoadingDiv {
+    z-index: 9999 !important;
+}
+
+#brainpanelbtn {
+    right: 5vh;
+    top: 30vh;
+    width: 15%;
+    left: 5vh;
+}
+
+.sContent {
+    max-width: 90%;
+    vertical-align: baseline;
+    font-size: calc(0.75vw + 0.75vh) !important;
+}
+
+.sTitle {
+    font-size: calc(1vw + 1vh) !important;
+    margin-left: 2vw;
+    color: #89ba2c;
+}
+
+.cd-panel__close:hover {
+    cursor: pointer;
+}
+
+#skeletal {
+    left: 5vh;
+    top: 12vh;
+}
+
+#neuron {
+    left: 5vh;
+    top: 46vh;
+}
+#ETC {
+    left: 5vh;
+    top: 15vh;
+}
+
+#backExretory {
+    left: 5vh;
+    top: 8vh;
+    opacity: 0;
+}
+
+#backKidney {
+    left: 5vh;
+    top: 8vh;
+    opacity: 0;
+}
+
+#kidney2dmodelbtn {
+    left: 5vh;
+    top: 14vh;
+}
+
+#exterior {
+    left: 5vh;
+    top: 38vh;
+}
+
+#backbtn {
+    position: absolute;
+    left: 3vw;
+    top: 10vh;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+#backbtn img {
+    width: 50px;
+    height: 50px;
+}
+
+#backbtn:hover {
+    transform: scale(1.2);
+}
+
+#smokingbtn {
+    left: 40vw;
+    top: 84vh;
+}
+#ribopanelbtn {
+    left: 80vh;
+    top: 84vh;
+}
+#eyebtn {
+    left: 45vw;
+    bottom: 0vh;
+}
+
+#backbtn {
+    left: 3vw;
+    top: 10vh;
+}
+
+#systembtn {
+    right: 0vh;
+    top: 5vh;
+}
+/* Create a top navigation bar with a black background color  */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav button {
+    float: left;
+    color: #2355a0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav button:hover {
+    background-color: #2355a0;
+    color: white;
+}
+.tablinks {
+    position: relative;
+    left: 23%;
+    border-radius: 0px;
+}
+
+#instructionicon {
+    left: 12vmin;
+}
+
+#home {
+    left: 2vmin;
+}
+
+.iconclass {
+    width: 7vmin;
+    height: 7vmin;
+    position: absolute;
+    top: 90vmin;
+    transition: transform 0.2s;
+}
+
+.iconclass:hover {
+    transform: translateY(-1vmin);
+    cursor: pointer;
+}
+
+#diaphragmbtn {
+    left: 45vw;
+    top: 90vh;
+}
+
+#eyecsbtn {
+    left: 45vw;
+    top: 85vh;
+}
+
+#earcsbtn {
+    left: 45vw;
+    top: 85vh;
+}
+#earbtn {
+    left: 45vw;
+    top: 90vh;
+}
+
+#lungcsbtn {
+    left: 3vw;
+    top: 10vh;
+}
+
+.evolutionpanel {
+    left: 3vw;
+    top: 20vh;
+}
+
+.tabset > input[type="radio"] {
+  position: absolute;
+  left: -200vw;
+}
+
+.tabset .tab-panel {
+  display: none;
+}
+
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+  display: block;
+}
+
+.tabset > label {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px 25px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabset > label::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  width: 22px;
+  height: 4px;
+  background: #8d8d8d;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label,
+.tabset > input:checked + label {
+  color: #06c;
+}
+
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background: #06c;
+}
+
+.tabset > input:checked + label {
+  border-color: #ccc;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.tab-panel {
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+}
+
+.tabset {
+  max-width: 65em;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  z-index: 10000;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Custom rotation for each tooltip */
+.menu li:nth-child(1) .tooltiptext {
+  transform: rotate(300deg); /* No rotation for first tooltip */
+}
+.menu li:nth-child(0) .tooltiptext {
+  transform: rotate(300deg); /* No rotation for first tooltip */
+}
+
+.menu li:nth-child(2) .tooltiptext {
+  transform: rotate(0deg); /* Rotate second tooltip by 10 degrees */
+  transform: translateY(30px);
+}
+
+.menu li:nth-child(3) .tooltiptext {
+  transform: rotate(-35deg); /* Rotate third tooltip by 20 degrees */
+}
+
+.menu li:nth-child(4) .tooltiptext {
+  transform: rotate(-70deg); /* Rotate fourth tooltip by -10 degrees */
+}
+
+.menu li:nth-child(5) .tooltiptext {
+  transform: rotate(-110deg); /* Rotate fifth tooltip by -20 degrees */
+}
+.menu li:nth-child(6) .tooltiptext {
+  transform: rotate(-145deg); /* Rotate fifth tooltip by -20 degrees */
+}
+.menu li:nth-child(7) .tooltiptext {
+  transform: rotate(-180deg); /* Rotate fifth tooltip by -20 degrees */
+}
+.menu li:nth-child(8) .tooltiptext {
+  transform: rotate(-215deg); /* Rotate fifth tooltip by -20 degrees */
+}
+
+.menu li:nth-child(9) .tooltiptext {
+  transform: rotate(-252deg); /* Rotate fifth tooltip by -20 degrees */
+}
+.menu li:nth-child(10) .tooltiptext {
+  transform: rotate(-290deg); /* Rotate fifth tooltip by -20 degrees */
+}
+
+.menu li:nth-child(11) .tooltiptext {
+  transform: rotate(35deg); /* No rotation for first tooltip */
+}
+
+/* Menu Container */
+.menu {
+  position: fixed;
+  top: 40%;
+  right: 5vw;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding-right: 30px;
+}
+
+/* List Item Styles */
+.menu li {
+  position: absolute;
+  left: 0;
+  list-style: none;
+  transform-origin: 100px;
+  transition: 0.5s ease;
+  transition-delay: calc(0.1s * var(--i));
+  transform: rotate(0deg) translateX(80px);
+}
+
+.menu.active li {
+  transform: rotate(calc(360deg / 10 * var(--i))) translateX(200px);
+}
+
+/* Button Styles */
+.menu li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transform: rotate(calc(360deg / -10 * var(--i)));
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.4s ease;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Noticeable Gradients for Each Button */
+.menu li:nth-child(1) a {
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Nervous system - deep purple to bright blue */
+}
+
+.menu li:nth-child(2) a {
+  background: linear-gradient(135deg, #00b09b, #96c93d); /* Skeletal system - turquoise to lime green */
+}
+
+.menu li:nth-child(3) a {
+  background: linear-gradient(135deg, #ff512f, #f09819); /* Excretory system - fiery red to orange */
+}
+
+.menu li:nth-child(4) a {
+  background: linear-gradient(135deg, #d31027, #ea384d); /* Respiratory system - deep red to vivid pink */
+}
+
+.menu li:nth-child(5) a {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0); /* Digestive system - rich purple to deep indigo */
+}
+
+.menu li:nth-child(6) a {
+  background: linear-gradient(135deg, #ff8008, #ffc837); /* Circulatory system - bright orange to golden yellow */
+}
+
+.menu li:nth-child(7) a {
+  background: linear-gradient(135deg, #801a1a, #d02626); /* Lymphatic system - dark blue to cyan */
+}
+
+.menu li:nth-child(8) a {
+  background: linear-gradient(135deg, #0bb6ff, #2c5364); /* Muscular system - deep teal to dark gray */
+}
+
+.menu li:nth-child(9) a {
+  background: linear-gradient(135deg, #f7971e, #ffd200); /* Endocrine system - golden yellow to bright amber */
+}
+
+.menu li:nth-child(10) a {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b); /* Integumentary system - vivid pink to bright red */
+}
+
+.menu li:nth-child(11) a {
+  background: linear-gradient(135deg, #f12711, #f5af19); /* Extra button - rich red to golden orange */
+}
+
+/* Hover Effect for Buttons */
+.menu li a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #ffffff, #ece9e6);
+  transform: scale(1.2) rotate(calc(360deg / -10 * var(--i)));
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Toggle Button */
+.toggle {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #49a0ae, #00d4ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    font-size: 2em;
+    color: #fff;
+    transition: transform 1.25s ease;
+    /*overflow: hidden; /* Added to contain the ripple effect */
+}
+.menu.active .toggle {
+  transform: rotate(360deg);
+}
+
+/* Hollow Circle Animation */
+.toggle::before,
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: expandCircle 2s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.toggle::after {
+  animation-delay: 0.5s;
+}
+
+@keyframes expandCircle {
+  0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+  }
+    70% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0.5;
+  }
+  100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+  }
+}
+
+/* Enhanced Chatbox Styles with Gradients */
+#chatbox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 25%;
+  height: 70%;
+  background: linear-gradient(135deg, #667eea, #764ba2); /* Beautiful gradient for chatbox */
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3); /* Strong shadow for a lifted effect */
+  display: none;
+  flex-direction: column;
+  z-index: 10001;
+  transition: all 0.3s ease-in-out; /* Smooth transition for open/close */
+}
+
+#messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee); /* Soft gradient for the message background */
+  border-radius: 20px 20px 0 0;
+  box-shadow: inset 0 -1px 10px rgba(0, 0, 0, 0.05); /* Inner shadow for message area */
+}
+
+.message {
+  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient for incoming messages */
+  color: #333;
+  max-width: 75%;
+  word-wrap: break-word;
+  font-size: 15px;
+  animation: fadeIn 0.5s ease;
+}
+
+.message.user {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Gradient for user messages */
+  align-self: flex-end;
+}
+
+#input-box {
+  display: flex;
+  padding: 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 20px 20px;
+  box-shadow: inset 0 1px 12px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for input area */
+}
+
+#input-box input {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  margin-right: 10px;
+  font-size: 16px;
+  outline: none;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for input */
+  transition: border-color 0.3s ease;
+}
+
+#input-box input:focus {
+  border-color: #764ba2; /* Match gradient color on focus */
+}
+
+#input-box button {
+  background: linear-gradient(135deg, #667eea, #764ba2); /* Gradient for the send button */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#input-box button:hover {
+  transform: scale(1.05); /* Slight hover effect for send button */
+}
+
+#toggle-chatbox {
+  position: fixed;
+  bottom: 1.85%;
+  right: 1.85%;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Gradient for toggle button */
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 10002;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Strong shadow for toggle button */
+  transition: all 0.3s ease;
+}
+
+#toggle-chatbox:hover {
+  background-color: #f8a5c2; /* Slight color change on hover */
+  transform: scale(1.1); /* Slight hover effect */
+}
+
+/* Smooth fade-in for chat messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+        transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+        transform: translateY(0);
+  }
+}
+
+.ttext {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    z-index: 1;
+    opacity: 0;
+    animation: flashAnim 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    display: block;
+    padding: 12px 24px;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 22px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(105deg, #a445b2, #d41872, #ff0066);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(164, 69, 178, 0.35);
+}
+
+.ttext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: flashAnim 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #a445b2 transparent transparent transparent;
+}
+
+@keyframes flashAnim {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+/* Cell Membrane Popup Styles */
+.cell-membrane-popup {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+}
+
+.cell-membrane-popup .swal2-html-container {
+    overflow: auto;
+    max-height: 70vh;
+}
+
+.cell-membrane-popup button[onclick] {
+    transition: all 0.3s ease !important;
+    background: rgba(255, 0, 0, 0.5) !important;
+    border: 2px solid #b30000 !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.cell-membrane-popup button[onclick]:hover {
+    background: rgba(255, 0, 0, 1) !important;
+    border-color: #7f0000 !important;
+    color: #fff !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+    box-shadow: 0 4px 12px rgba(255,0,0,0.3) !important;
+}
+
+.cell-membrane-popup button[onclick]:active {
+    transform: translate(-50%, -50%) scale(0.95) !important;
+    background: #b30000 !important;
+    border-color: #7f0000 !important;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .cell-membrane-popup button[onclick] {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 12px !important;
+    }
+    
+    .cell-membrane-popup .swal2-html-container {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cell-membrane-popup button[onclick] {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 10px !important;
+    }
+}
+
+#phospho1 {
+    left: 45vw;
+    top: 80vh;
+}
+
+#phospho2 {
+    left: 44.5vw;
+    top: 90vh;
+}

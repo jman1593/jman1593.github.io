@@ -1,1915 +1,313 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Math Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Biology Simulation is a biology simulation platform that offers interactive 3D models of cellular structures and processes. Users can explore detailed visualizations of cell components and biological systems. The site serves as an educational tool, bridging the gap between traditional learning and modern visualization techniques.">
+    <meta property="og:description" content="Biology Simulation is a biology simulation platform that offers interactive 3D models of cellular structures and processes. Users can explore detailed visualizations of cell components and biological systems. The site serves as an educational tool, bridging the gap between traditional learning and modern visualization techniques.">
+    <meta property="og:url" content="https://bio-sim.us" />
+    <meta property="og:site_name" content="Biology Simulation" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Biology Simulation" />
+    <meta property="og:image" content="images/favicon.png" />
+    <meta property="og:image:secure_url" content="images/favicon.png" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="480" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <title>Biology Sim</title>
+    <link rel="stylesheet" href="static/mui.css">
+    <link href="static/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="static/slide-in-pane_style.css">
+    <link rel="stylesheet" href="static/slide-in-panel_css_demo.css">
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <script src="js/babylon.js"></script>
+    <script src="js/babylon.gui.js"></script>
+    <script src="js/babylonjs.loaders.min.js"></script>
+    <script src="js/tween.umd.js"></script>
+    <script src="js/mui.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/stats.js"></script>
   </head>
-  <style>
-    body {
-      font-family: "Inter", sans-serif;
-      background-color: #0f172a;
-      color: #ffffff;
-    }
+  <body>
+    <div id="bottom-right-image"></div>
+    <div id="babylonjsLoadingDiv" style="display: none;">
+      <img src="images/favicon.png" alt="Loading..." class="loading-icon">
+      <div class="loading-text">Loading...</div>
+    </div>
+    <h1 id="title">Human</h1>
+    <div id="button-container"></div>
+    <button onclick = "loadhuman()" id="backHuman" class="mui-btn mui-btn--primary largeBtn">Human Anatomy</button>
+    <button onclick = "loadexcretory(0)" id="backExretory" class="mui-btn mui-btn--primary largeBtn">Go Back to Exretory System</button>
+    <button onclick = "loadkidney(0)" id="backKidney" class="mui-btn mui-btn--primary largeBtn">Go Back to Kidney</button>
+    <button onclick = "showExteriorBrain()" style="display: none;" id="exterior" class="mui-btn mui-btn--primary largeBtn pulse">Show Exterior View</button>
+    <button onclick="loadcell()" id="backcell" class="mui-btn mui-btn--primary largeBtn">Cellular Structure</button>
+    <button onclick = "loadPanel('brainpanel')" style="display: none;" id="brainpanelbtn" class="mui-btn mui-btn--primary largeBtn pulse">Brain Information</button>
+    <button onclick = "loadneuron(1)" style="display: none;" id="neuron" class="mui-btn mui-btn--primary largeBtn pulse">Show Neuron</button>
+    <button onclick = "loadETC(1)" style="display: no8ne;" id="ETC" class="mui-btn mui-btn--primary largeBtn pulse">Show Electron Transport Chain</button>
+    <button onclick="loadnephron()" id="nephronbtn" style="display: none;" class="mui-btn mui-btn--primary nephronbtns pulse">Show Nepheron</button>
+    <button onclick="kidney2dmodel()" id="kidney2dmodelbtn" style="display: none;" class="mui-btn mui-btn--primary largeBtn pulse">Kidney 2d Model</button>
+    <button onclick="loadeyecs()" id="eyecsbtn" style="display: none;" class="mui-btn mui-btn--primary largeBtn pulse">Eye Cross Section</button>
+    <button onclick="backPage()" id="backbtn">
+      <img src="images/back.png" alt="Go Back">
+    </button>
+    <button onclick="bowmanclicked()" style="display: none;" id="bowman" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">1</button>
+    <button onclick="epitheliumclicked()" style="display: none;" id="epithelium" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">2</button>
+    <button onclick="stromaclicked()" style="display: none;" id="stroma" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">3</button>
+    <button onclick="descementclicked()" style="display: none;" id="descement" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">4</button>
+    <button onclick="endotheliumclicked()" style="display: none;" id="endothelium" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">5</button>
+    <button onclick="loadearcs()" id="earcsbtn" style="display: none;" class="mui-btn mui-btn--primary earbtns largeBtn pulse">Ear Cross Section</button>
+    <button onclick="membraneclicked()" style="display: none;" id="bowman" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">1</button>
+    <button onclick="phosphoclicked()" style="display: none;" id="epithelium" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">2</button>
+    <button onclick="phosphoclicked2()" style="display: none;" id="stroma" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">3</button>
+    <button onclick="phosphoclicked2()" style="display: none;" id="descement" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">4</button>
+    <button onclick="openchannel()" style="display: none;" id="endothelium" class="mui-btn mui-btn--primary mui-btn--fab corneabtns pulse">5</button>
+      
+      
+      <div class="topnav" id = "tabBtn" style="display: none;">
+        <button class="tablinks largeBtn" onclick="loadnervous()">Nervous</button>
+        <button class="tablinks largeBtn" onclick="loadskeletal(0)">Skeletal</button>
+        <button class="tablinks largeBtn" onclick="loadexcretory(0)">Excretory</button>
+        <button class="tablinks largeBtn" onclick="loadrespinsitu()">Respiratory</button>
+        <button class="tablinks largeBtn" onclick="loaddigestiveinsitu(0)">Digestive</button>
+        <button class="tablinks largeBtn" onclick="loadcirculatory(0)">Circulatory</button>
+        <button class="tablinks largeBtn" onclick="loadlymphatic(0)">Lymphatic</button>
+        <button class="tablinks largeBtn" onclick="loadmuscular(0)">Muscular</button>
+        <button class="tablinks largeBtn" onclick="loadendocrine(0)">Endocrine</button>
+        <button class="tablinks largeBtn" onclick="loadskin()">Integumentary</button>
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Poppins", sans-serif;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #6366f1, #f43f5e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-bg {
-      background-image: radial-gradient(
-          circle at 20% 20%,
-          rgba(99, 102, 241, 0.15) 0%,
-          transparent 70%
-        ),
-        radial-gradient(
-          circle at 80% 80%,
-          rgba(244, 63, 94, 0.15) 0%,
-          transparent 70%
-        );
-    }
-
-    .math-symbol {
-      position: absolute;
-      opacity: 0.07;
-      user-select: none;
-      pointer-events: none;
-      font-family: "Times New Roman", serif;
-      font-weight: bold;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.4s ease forwards;
-    }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .game-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .difficulty-btn {
-      transition: transform 0.2s, box-shadow 0.2s;
-      font-size: 1rem;
-    }
-    .difficulty-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #feedback.correct {
-      color: #10b981;
-      animation: correctPulse 0.4s ease-in;
-    }
-    #feedback.incorrect {
-      color: #f43f5e;
-      animation: incorrectShake 0.4s ease-in;
-    }
-
-    @keyframes correctPulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.25);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    @keyframes incorrectShake {
-      0% {
-        transform: translate(0, 0);
-      }
-      25% {
-        transform: translate(-4px, 0);
-      }
-      50% {
-        transform: translate(4px, 0);
-      }
-      75% {
-        transform: translate(-4px, 0);
-      }
-      100% {
-        transform: translate(0, 0);
-      }
-    }
-
-    .success-animation {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(
-        circle,
-        rgba(16, 185, 129, 1) 0%,
-        rgba(16, 185, 129, 0) 70%
-      );
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: successBurstImproved 1s forwards;
-      z-index: 10;
-    }
-    @keyframes successBurstImproved {
-      0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-      }
-      50% {
-        width: 120px;
-        height: 120px;
-        opacity: 1;
-      }
-      100% {
-        width: 160px;
-        height: 160px;
-        opacity: 0;
-      }
-    }
-
-    .fail-animation-improved {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(
-        circle,
-        rgba(244, 63, 94, 1) 0%,
-        rgba(244, 63, 94, 0) 70%
-      );
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: failBurstImproved 0.6s forwards;
-      z-index: 10;
-    }
-    @keyframes failBurstImproved {
-      0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-      }
-      50% {
-        width: 80px;
-        height: 80px;
-        opacity: 1;
-      }
-      100% {
-        width: 120px;
-        height: 120px;
-        opacity: 0;
-      }
-    }
-  </style>
-  <body class="bg-dark text-gray-200 min-h-screen overflow-x-hidden fade-in">
-    <div
-      id="symbolsContainer"
-      class="fixed inset-0 overflow-hidden pointer-events-none z-0"
-    ></div>
-    <nav
-      class="sticky top-0 z-50 bg-dark backdrop-blur-lg border-b border-gray-800"
-    >
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center">
-          <a href="#" class="flex items-center">
-            <div
-              class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl"
-            >
-              M
-            </div>
-            <span class="ml-3 font-bold text-xl">The Math Hub</span>
-          </a>
-        </div>
       </div>
-    </nav>
-    <section class="hero-bg py-20">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
-          <div class="lg:w-1/2">
-            <h1
-              class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-            >
-              <span class="gradient-text">Math</span> through <br />
-              the lens of <span class="gradient-text">gaming</span>
-            </h1>
-            <p class="text-lg mb-8 text-gray-300 max-w-2xl">
-              We've taken the frustration out of learning math. Our game-based
-              approach makes learning feel like play, even when you're tackling
-              complex concepts.
-            </p>
-            <div class="flex flex-wrap gap-4">
-              <button
-                id="getStartedBtn"
-                class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-all shadow-md hover:shadow-xl hover:-translate-y-1"
-              >
-                Get Started
-              </button>
-              <button
-                id="howItWorksBtn"
-                class="px-8 py-3 border-2 border-primary text-primary hover:bg-primary/10 rounded-lg font-medium transition-all"
-              >
-                How It Works
-              </button>
-            </div>
-          </div>
-          <div class="lg:w-1/2 relative">
-            <div class="relative w-full max-w-md mx-auto">
-              <div
-                class="absolute -top-12 -left-12 w-64 h-64 bg-primary/20 rounded-full filter blur-3xl"
-              ></div>
-              <div
-                class="absolute -bottom-12 -right-12 w-64 h-64 bg-secondary/20 rounded-full filter blur-3xl"
-              ></div>
-              <div
-                class="relative bg-gray-800 rounded-2xl shadow-2xl p-8 z-10 border border-gray-700"
-              >
-                <div
-                  class="absolute -top-6 right-8 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
-                >
-                  NEW
-                </div>
-                <div class="text-center mb-6">
-                  <h2 class="text-2xl font-bold mb-2">Math Challenges</h2>
-                  <p class="text-gray-300">
-                    Pick your subject, set the difficulty
-                  </p>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                  <div
-                    class="challenge-card bg-gray-700 p-4 rounded-xl text-center"
-                    data-game="geometry"
-                  >
-                    <div class="text-4xl font-bold text-primary mb-2">π</div>
-                    <div class="text-sm">Geometry</div>
-                  </div>
-                  <div
-                    class="challenge-card bg-gray-700 p-4 rounded-xl text-center"
-                    data-game="calculus"
-                  >
-                    <div class="text-4xl font-bold text-secondary mb-2">∫</div>
-                    <div class="text-sm">Calculus</div>
-                  </div>
-                  <div
-                    class="challenge-card bg-gray-700 p-4 rounded-xl text-center"
-                    data-game="functions"
-                  >
-                    <div class="text-4xl font-bold text-accent mb-2">f(x)</div>
-                    <div class="text-sm">Functions</div>
-                  </div>
-                  <div
-                    class="challenge-card bg-gray-700 p-4 rounded-xl text-center"
-                    data-game="numbers"
-                  >
-                    <div class="text-4xl font-bold text-orange-500 mb-2">∞</div>
-                    <div class="text-sm">Numbers</div>
-                  </div>
-                </div>
-                <div
-                  id="startNewChallenge"
-                  class="text-center inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full font-medium cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  Start a new challenge
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+    <canvas id="babcanv"></canvas>
+<div id="chatbox">
+  <div id="messages"></div>
+  <div id="input-box">
+    <input type="text" id="user-input" placeholder="Type a message">
+    <button id="send-button" onclick="sendMessage()">Send</button>
+  </div>
+</div>
+    <script>
+        let messagesDiv = document.getElementById('messages');
+        let input = document.getElementById("user-input");
+        let chatbox = document.getElementById('chatbox');
+        let toggleButton = document.getElementById('toggle-chatbox');
+
+        // Function to toggle the chatbox visibility
+        function toggleChatbox() {
+            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+                chatbox.style.display = 'flex';
+                toggleButton.textContent = 'Close Chat';
+                toggleButton.style.bottom = '74%';
+            } else {
+                chatbox.style.display = 'none';
+                toggleButton.textContent = 'Open Chat';
+                toggleButton.style.bottom = '1.85%';
+            }
+        }
+
+        input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+            input.value="";
+        }
+        });
+
+        function addMessage(text, isUser = true, buttonName = "none") {
+            let messageDiv = document.createElement('div');
+            console.log(messageDiv)
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = (isUser ? 'User: ' : 'Bot:<br>') + text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            console.log(("" + buttonName).toLowerCase())
+            if (!(("" + buttonName).toLowerCase().includes("none")) && !isUser) {
+                addButton(buttonName, messageDiv);
+            }
+        }
+
+        function addButton(buttonName, parentDiv) {
+            let button = document.createElement('button');
+            button.className = 'chatbotbutton';
+            button.textContent = 'View Model';
+            parentDiv.appendChild(button);            
+            button.onclick = function(){eval("load" + buttonName + "(0)")}
+        }
+
+        async function sendMessage() {
+            let userInput = document.getElementById('user-input').value;
+            if (userInput === '') return;
+
+            addMessage(userInput);
+
+            document.getElementById('user-input').value = '';
+
+            let response = await getGeminiResponse(userInput);
+            reply = response.reply
+            if(!response.button.includes("none") && reply.includes("Sorry, I cannot help you with that.")){
+              reply += "However, here is a 3D model which may help you."
+            }
+            reply += "<br>"
+            addMessage(reply, false, response.button);
+            console.log(response.button)
+
+        }
+
+        async function getGeminiResponse(userInput) {
+            try {
+                //let response = await fetch('http://3.144.167.127:8000/gemini-chat', {
+                let response = await fetch('https://d9iark2n2h.us-west-2.awsapprunner.com/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userinput: userInput })
+                });
+                let data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Error with Gemini request", error);
+                return {reply: "Sorry, I couldn't process that. Try again!", button: "none"}
+            }
+        }
+
+        function tabsMenu() {
+
+          console.log("in")
+          if (document.getElementById("systembtn").textContent == "Show Human Body Systems") {
+            document.getElementById("tabBtn").style.display = "block";
+            document.getElementById("systembtn").textContent = "Hide Human Body Systems";
+          }
+          else {
+            document.getElementById("tabBtn").style.display = "none";
+            document.getElementById("systembtn").textContent = "Show Human Body Systems";
+          }
+            
+        }
+        function openPage(pageName, elmnt, color) {
+          // Hide all elements with class="tabcontent" by default */
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Remove the background color of all tablinks/buttons
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+
+          // Show the specific tab content
+          document.getElementById(pageName).style.display = "block";
+
+          // Add the specific color to the button usd to open the tab content
+          elmnt.style.backgroundColor = color;
+        }
+        
+      </script>
+    <script src="js/instructions.js"></script>
+    <script>
+      const fpPromise = import('https://fpjscdn.net/v3/cJJ0xKkWM7dj4CmYHcsh')
+    .then(FingerprintJS => FingerprintJS.load())
+
+  fpPromise
+    .then(fp => fp.get())
+    .then(result => {
+      const visitorId = result.visitorId
+      fetch("https://teamlegend.us/api/biosim/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ip: visitorId }),
+        });
+    })
+    
+  </script>
+   <div class="menu">
+    <div class="toggle"><ion-icon name="body-outline"></ion-icon><span class="ttext">Organ Systems</span></div>
+    <li style="--i:0;">
+      <div class="tooltip">
+        <a href="#" onclick="loadnervous()"><img src="./images/nervous.png" alt="Nervous system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Nervous System</span>
       </div>
-    </section>
-    <section id="howItWorksSection" class="py-20 bg-gray-900/50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto mb-16">
-          <h2 class="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
-          <p class="text-gray-300 text-lg">
-            We've built something that actually makes math fun, not just
-            something that claims to.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div
-            class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"
-          >
-            <div
-              class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary mb-4"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Game mechanics</h3>
-            <p class="text-gray-400">
-              We use the same psychology that makes games addictive to make
-              learning math stick. Points, levels, and rewards keep you coming
-              back.
-            </p>
-          </div>
-          <div
-            class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"
-          >
-            <div
-              class="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary mb-4"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Adaptive difficulty</h3>
-            <p class="text-gray-400">
-              The system learns what you're good at and what you struggle with,
-              then adjusts to keep you in the sweet spot between bored and
-              frustrated.
-            </p>
-          </div>
-          <div
-            class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700"
-          >
-            <div
-              class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center text-accent mb-4"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Instant feedback</h3>
-            <p class="text-gray-400">
-              No more wondering if you got it right. Get immediate feedback on
-              your answers and understand mistakes right away, not days later.
-            </p>
-          </div>
-        </div>
+    </li>
+    <li style="--i:1;">
+      <div class="tooltip">
+        <a href="#" onclick="loadskeletal(0)"><img src="./images/skeletal.png" alt="Skeletal system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Skeletal System</span>
       </div>
-    </section>
-    <section class="bg-primary py-16">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
-          Ready to actually enjoy math?
-        </h2>
-        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-          It's not about being a "math person" - it's about finding the right
-          way to learn.
-        </p>
-        <button
-          id="tryItFreeBtn"
-          class="px-8 py-4 bg-white text-primary hover:bg-gray-100 rounded-lg font-semibold text-lg transition-all shadow-lg hover:shadow-xl"
-        >
-          Try it free
-        </button>
+    </li>
+    <li style="--i:2;">
+      <div class="tooltip">
+        <a href="#" onclick="loadexcretory(0)"><img src="./images/excretory.png" alt="Excretory system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Excretory System</span>
       </div>
-    </section>
+    </li>
+    <li style="--i:3;">
+      <div class="tooltip">
+        <a href="#" onclick="loadrespinsitu()"><img src="./images/respiratory.png" alt="Respiratory system" style="width: 40px; height: 40px;"></a>
+        <span class="tooltiptext">Respiratory System</span>
+      </div>
+    </li>
+    <li style="--i:4;">
+      <div class="tooltip">
+        <a href="#" onclick="loaddigestiveinsitu(0)"><img src="./images/digestive.png" alt="Digestive system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Digestive System</span>
+      </div>
+    </li>
+    <li style="--i:5;">
+      <div class="tooltip">
+        <a href="#" onclick="loadcirculatory(0)"><img src="./images/circulatory.png" alt="Circulatory system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Circulatory System</span>
+      </div>
+    </li>
+    <li style="--i:6;">
+      <div class="tooltip">
+        <span class="tooltiptext">Lymphatic System</span>
+        <a href="#" onclick="loadlymphatic(0)"><img src="./images/lymphatic.png" alt="Lymphatic system" style="width: 50px; height: 50px;"></a>
+        
+      </div>
+    </li>
+    <li style="--i:7;">
+      <div class="tooltip">
+        <a href="#" onclick="loadmuscular(0)"><img src="./images/muscular.png" alt="Muscular system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Muscular System</span>
+      </div>
+    </li>
+    <li style="--i:8;">
+      <div class="tooltip">
+        <a href="#" onclick="loadendocrine(0)"><img src="./images/endocrine.png" alt="Endocrine system" style="width: 50px; height: 50px;"></a>
+        <span class="tooltiptext">Endocrine System</span>
+      </div>
+    </li>
+    <li style="--i:9;">
+      <div class="tooltip">
+        <a href="#" onclick="loadskin()"><img src="./images/skin.png" alt="Integumentary system" style="width: 40px; height: 40px;"></a>
+        <span class="tooltiptext">Integumentary System</span>
+      </div>
+    </li>
+  </div>
+  <a title="Instructions" target="_blank" onclick="showInstructions()"><img id="instructionicon" class="iconclass" src="images/Question_Mark_Icon.png"></a>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+  let toggle = document.querySelector('.toggle');
+  let menu = document.querySelector('.menu');
+  let ttext = document.querySelector('.ttext');
+  toggle.onclick = function(){
+    if (ttext) {
+      ttext.style.display = 'none'; // Hide only the "Organ Systems" text
+    }
+    menu.classList.toggle('active'); // Keep the normal toggle functionality
+  }
+</script>
+<script>
+  const localStorageData = localStorage.getItem('approved')
+  if (localStorageData) {
+  location.replace("./index.html/");
+  }
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/main.js"></script>
+    <div id="evolution-buttons-container"></div>
   </body>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "#6366F1",
-            secondary: "#F43F5E",
-            accent: "#10B981",
-            dark: "#0F172A",
-            light: "#F8FAFC",
-          },
-        },
-      },
-    };
-    document.documentElement.classList.add("dark");
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const container = document.getElementById("symbolsContainer");
-      if (container) {
-        const symbols = [
-          "π",
-          "∫",
-          "∑",
-          "√",
-          "∂",
-          "∞",
-          "θ",
-          "Δ",
-          "≈",
-          "≠",
-          "≤",
-          "≥",
-          "±",
-          "×",
-          "÷",
-          "+",
-          "=",
-          "f(x)",
-          "lim",
-          "∀",
-          "∃",
-        ];
-        for (let i = 0; i < 25; i++) {
-          const symbol = document.createElement("div");
-          symbol.classList.add("math-symbol");
-          symbol.textContent =
-            symbols[Math.floor(Math.random() * symbols.length)];
-          symbol.style.left = `${Math.random() * 100}%`;
-          symbol.style.top = `${Math.random() * 100}%`;
-          const size = 20 + Math.random() * 60;
-          symbol.style.fontSize = `${size}px`;
-          symbol.style.transform = `rotate(${Math.random() * 360}deg)`;
-          container.appendChild(symbol);
-        }
-      }
-
-      const transitionTo = (url) => {
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = url;
-        }, 400);
-      };
-
-      const howItWorksBtn = document.getElementById("howItWorksBtn");
-      if (howItWorksBtn) {
-        howItWorksBtn.addEventListener("click", () => {
-          const howItWorksSection =
-            document.getElementById("howItWorksSection");
-          if (howItWorksSection) {
-            howItWorksSection.scrollIntoView({ behavior: "smooth" });
-          }
-        });
-      }
-
-      const getStartedBtn = document.getElementById("getStartedBtn");
-      if (getStartedBtn) {
-        getStartedBtn.addEventListener("click", () => {
-          transitionTo("games");
-        });
-      }
-
-      const tryItFreeBtn = document.getElementById("tryItFreeBtn");
-      if (tryItFreeBtn) {
-        tryItFreeBtn.addEventListener("click", () => {
-          transitionTo("games");
-        });
-      }
-
-      const challengeCards = document.querySelectorAll(".challenge-card");
-      challengeCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          transitionTo("games");
-        });
-      });
-
-      const startNewChallenge = document.getElementById("startNewChallenge");
-      if (startNewChallenge) {
-        startNewChallenge.addEventListener("click", () => {
-          transitionTo("games");
-        });
-      }
-
-      const gamesMain = document.getElementById("gamesMain");
-      const geometryContainer = document.getElementById("geometryContainer");
-      const calculusContainer = document.getElementById("calculusContainer");
-      const functionsContainer = document.getElementById("functionsContainer");
-      const numbersContainer = document.getElementById("numbersContainer");
-      const playContainer = document.getElementById("playContainer");
-      const gameTitle = document.getElementById("gameTitle");
-      const gameInfo = document.getElementById("gameInfo");
-      const questionText = document.getElementById("questionText");
-      const playerAnswer = document.getElementById("playerAnswer");
-      const submitAnswer = document.getElementById("submitAnswer");
-      const feedback = document.getElementById("feedback");
-      const scoreboard = document.getElementById("scoreboard");
-      const returnToDifficulty = document.getElementById("returnToDifficulty");
-      const coolAnimation = document.getElementById("coolAnimation");
-
-      function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-        return null;
-      }
-      function setCookie(name, value) {
-        document.cookie = `${name}=${value}; path=/; max-age=31536000`;
-      }
-
-      let totalPoints = 0;
-      const existingPoints = getCookie("mathhub_points");
-      if (existingPoints) totalPoints = parseInt(existingPoints, 10);
-      if (scoreboard) scoreboard.textContent = `Total Points: ${totalPoints}`;
-
-      let currentGame = "";
-      let currentDifficulty = "";
-      let currentQuestion = {};
-      let questionActive = false;
-
-      // HELPER FUNCTIONS
-      function randInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-      function factorial(n) {
-        let result = 1;
-        for (let i = 1; i <= n; i++) {
-          result *= i;
-        }
-        return result;
-      }
-      function pickRandom(fnArray) {
-        return fnArray[Math.floor(Math.random() * fnArray.length)]();
-      }
-      function capitalize(s) {
-        return s.charAt(0).toUpperCase() + s.slice(1);
-      }
-
-      // GEOMETRY EASY (10)
-      function generateGeometryEasy1() {
-        const length = randInt(1, 10);
-        const width = randInt(1, 10);
-        return {
-          question: `Rectangle with length ${length} and width ${width}, area?`,
-          answer: (length * width).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy2() {
-        const angleA = randInt(1, 80);
-        const angleB = randInt(1, 80);
-        const angleC = 180 - (angleA + angleB);
-        return {
-          question: `Triangle angles: ${angleA}°, ${angleB}°, and ? Find the missing angle.`,
-          answer: angleC.toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy3() {
-        const side = randInt(1, 10);
-        return {
-          question: `Square with side ${side}, perimeter?`,
-          answer: (4 * side).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy4() {
-        const side = randInt(1, 10);
-        return {
-          question: `Square with side ${side}, area?`,
-          answer: (side * side).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy5() {
-        const length = randInt(1, 10);
-        const width = randInt(1, 10);
-        return {
-          question: `Rectangle perimeter if length=${length} and width=${width}?`,
-          answer: (2 * (length + width)).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy6() {
-        const side1 = randInt(1, 10);
-        const side2 = randInt(1, 10);
-        return {
-          question: `Right triangle legs ${side1}, ${side2}. Hypotenuse? (rounded)`,
-          answer: Math.round(
-            Math.sqrt(side1 * side1 + side2 * side2)
-          ).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy7() {
-        const side = randInt(1, 10);
-        return {
-          question: `Hexagon with all sides = ${side}. Perimeter? (regular hex)`,
-          answer: (6 * side).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy8() {
-        const base = randInt(1, 10);
-        const height = randInt(1, 10);
-        return {
-          question: `Triangle base=${base}, height=${height}, area?`,
-          answer: (0.5 * base * height).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy9() {
-        const radius = randInt(1, 5);
-        return {
-          question: `Circle radius=${radius}, circumference? (round)`,
-          answer: Math.round(2 * Math.PI * radius).toString(),
-          points: 5,
-        };
-      }
-      function generateGeometryEasy10() {
-        const radius = randInt(1, 5);
-        return {
-          question: `Circle radius=${radius}, area? (round)`,
-          answer: Math.round(Math.PI * radius * radius).toString(),
-          points: 5,
-        };
-      }
-
-      // GEOMETRY MEDIUM (10)
-      function generateGeometryMed1() {
-        const sides = randInt(3, 10);
-        const sumAngles = (sides - 2) * 180;
-        return {
-          question: `${sides}-sided polygon, sum of interior angles?`,
-          answer: sumAngles.toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed2() {
-        const base = randInt(1, 15);
-        const slant = randInt(1, 20);
-        return {
-          question: `A right triangle has base=${base} and hypotenuse=${slant}. Height? (round)`,
-          answer: Math.round(Math.sqrt(slant * slant - base * base)).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed3() {
-        const sides = randInt(3, 10);
-        const sideLen = randInt(1, 10);
-        return {
-          question: `Regular polygon with ${sides} sides each of length ${sideLen}. Perimeter?`,
-          answer: (sides * sideLen).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed4() {
-        const d1 = randInt(1, 15);
-        const d2 = randInt(1, 15);
-        return {
-          question: `Rhombus with diagonals=${d1} and ${d2}, area?`,
-          answer: (0.5 * d1 * d2).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed5() {
-        const sideA = randInt(1, 10);
-        const sideB = randInt(1, 10);
-        const sideC = randInt(1, 10);
-        const perimeter = sideA + sideB + sideC;
-        return {
-          question: `Triangle sides=${sideA},${sideB},${sideC}, perimeter?`,
-          answer: perimeter.toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed6() {
-        const radius = randInt(1, 7);
-        return {
-          question: `Circle radius=${radius}, diameter?`,
-          answer: (radius * 2).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed7() {
-        const side = randInt(1, 10);
-        const diag = Math.sqrt(2) * side;
-        return {
-          question: `Square side=${side}, diagonal? (1 dec place)`,
-          answer: (Math.round(diag * 10) / 10).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed8() {
-        const side = randInt(3, 10);
-        const extAngle = 360 / side;
-        return {
-          question: `Regular polygon with ${side} sides, each exterior angle?`,
-          answer: extAngle.toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed9() {
-        const radius = randInt(1, 10);
-        const chordAngle = randInt(20, 160);
-        const chordLen =
-          2 * radius * Math.sin((chordAngle * (Math.PI / 180)) / 2);
-        return {
-          question: `Circle radius=${radius}, chord subtends ${chordAngle}° at center. Chord length? (round)`,
-          answer: Math.round(chordLen).toString(),
-          points: 10,
-        };
-      }
-      function generateGeometryMed10() {
-        const side = randInt(1, 10);
-        const area = ((3 * Math.sqrt(3)) / 2) * side * side;
-        return {
-          question: `Regular hexagon side=${side}, area? (round)`,
-          answer: Math.round(area).toString(),
-          points: 10,
-        };
-      }
-
-      // GEOMETRY HARD (10)
-      function generateGeometryHard1() {
-        const radius = randInt(1, 10);
-        const surfaceArea = 4 * Math.PI * radius * radius;
-        return {
-          question: `Sphere radius=${radius}, surface area? (round)`,
-          answer: Math.round(surfaceArea).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard2() {
-        const radius = randInt(1, 10);
-        const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
-        return {
-          question: `Sphere radius=${radius}, volume? (round)`,
-          answer: Math.round(volume).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard3() {
-        const side = randInt(1, 10);
-        const volume = side * side * side;
-        return {
-          question: `Cube side=${side}, volume?`,
-          answer: volume.toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard4() {
-        const rad = randInt(1, 10);
-        const height = randInt(1, 10);
-        const vol = Math.PI * rad * rad * (height / 3);
-        return {
-          question: `Cone radius=${rad}, height=${height}, volume? (round)`,
-          answer: Math.round(vol).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard5() {
-        const sideA = randInt(1, 10);
-        const sideB = randInt(1, 10);
-        const sideC = randInt(1, 10);
-        const s = (sideA + sideB + sideC) / 2;
-        const area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
-        return {
-          question: `Triangle sides=${sideA},${sideB},${sideC}, area? (round)`,
-          answer: isNaN(area) ? "0" : Math.round(area).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard6() {
-        const radius = randInt(1, 5);
-        const chordAngle = randInt(40, 140);
-        const chordLen =
-          2 * radius * Math.sin((chordAngle * (Math.PI / 180)) / 2);
-        return {
-          question: `Circle radius=${radius}, chord subtends ${chordAngle}° at center. Chord length? (1 dec)`,
-          answer: (Math.round(chordLen * 10) / 10).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard7() {
-        const side = randInt(1, 10);
-        const volume = (Math.sqrt(2) / 12) * side * side * side;
-        return {
-          question: `Regular tetrahedron edge=${side}, volume? (round)`,
-          answer: Math.round(volume).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard8() {
-        const side = randInt(1, 10);
-        const surfaceArea = 6 * side * side;
-        return {
-          question: `Cube side=${side}, surface area?`,
-          answer: surfaceArea.toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard9() {
-        const side = randInt(2, 5);
-        const volume = (side * side * (Math.sqrt(3) / 4) * side) / 3;
-        return {
-          question: `Triangular prism: base side=${side} (equilateral), height=${side}, volume? (round)`,
-          answer: Math.round(volume).toString(),
-          points: 15,
-        };
-      }
-      function generateGeometryHard10() {
-        const s = randInt(3, 6);
-        const angle = (180 * (s - 2)) / s;
-        return {
-          question: `Regular polygon with ${s} sides, each interior angle?`,
-          answer: angle.toString(),
-          points: 15,
-        };
-      }
-
-      // CALCULUS EASY (10)
-      function generateCalculusEasy1() {
-        return {
-          question: `Derivative of x^2?`,
-          answer: "2x",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy2() {
-        return {
-          question: `Integral of 2x dx?`,
-          answer: "x^2",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy3() {
-        return {
-          question: `Derivative of x^3?`,
-          answer: "3x^2",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy4() {
-        return {
-          question: `Integral of x dx?`,
-          answer: "x^2/2",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy5() {
-        return {
-          question: `Derivative of 5x?`,
-          answer: "5",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy6() {
-        return {
-          question: `Integral of 1 dx?`,
-          answer: "x",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy7() {
-        return {
-          question: `Derivative of x^2 + 1?`,
-          answer: "2x",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy8() {
-        return {
-          question: `Integral of 2 dx?`,
-          answer: "2x",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy9() {
-        return {
-          question: `Derivative of 7?`,
-          answer: "0",
-          points: 5,
-        };
-      }
-      function generateCalculusEasy10() {
-        return {
-          question: `Derivative of x?`,
-          answer: "1",
-          points: 5,
-        };
-      }
-
-      // CALCULUS MEDIUM (10)
-      function generateCalculusMed1() {
-        return {
-          question: `Integral of 3x^2 dx?`,
-          answer: "x^3",
-          points: 10,
-        };
-      }
-      function generateCalculusMed2() {
-        return {
-          question: `Derivative of x^4?`,
-          answer: "4x^3",
-          points: 10,
-        };
-      }
-      function generateCalculusMed3() {
-        return {
-          question: `Limit of (x - 2)/(x - 2) as x->2?`,
-          answer: "1",
-          points: 10,
-        };
-      }
-      function generateCalculusMed4() {
-        return {
-          question: `Integral of (4x^3) dx?`,
-          answer: "x^4",
-          points: 10,
-        };
-      }
-      function generateCalculusMed5() {
-        return {
-          question: `Derivative of sin(x)?`,
-          answer: "cos(x)",
-          points: 10,
-        };
-      }
-      function generateCalculusMed6() {
-        return {
-          question: `Integral of cos(x) dx?`,
-          answer: "sin(x)",
-          points: 10,
-        };
-      }
-      function generateCalculusMed7() {
-        return {
-          question: `Derivative of ln(x)?`,
-          answer: "1/x",
-          points: 10,
-        };
-      }
-      function generateCalculusMed8() {
-        return {
-          question: `Integral of 1/x dx?`,
-          answer: "ln|x|",
-          points: 10,
-        };
-      }
-      function generateCalculusMed9() {
-        return {
-          question: `Derivative of e^x?`,
-          answer: "e^x",
-          points: 10,
-        };
-      }
-      function generateCalculusMed10() {
-        return {
-          question: `Integral of e^x dx?`,
-          answer: "e^x",
-          points: 10,
-        };
-      }
-
-      // CALCULUS HARD (10)
-      function generateCalculusHard1() {
-        return {
-          question: `Limit of (x^2 - 4)/(x - 2) as x->2?`,
-          answer: "4",
-          points: 15,
-        };
-      }
-      function generateCalculusHard2() {
-        return {
-          question: `Derivative of sin(2x)?`,
-          answer: "2cos(2x)",
-          points: 15,
-        };
-      }
-      function generateCalculusHard3() {
-        return {
-          question: `Integral of x*sin(x) dx? (use -cos(x)*x + sin(x) approach)`,
-          answer: "-x cos(x) + sin(x)",
-          points: 15,
-        };
-      }
-      function generateCalculusHard4() {
-        return {
-          question: `Derivative of (x^2)(e^x)? (product rule)`,
-          answer: "2x e^x + x^2 e^x",
-          points: 15,
-        };
-      }
-      function generateCalculusHard5() {
-        return {
-          question: `Integral of 2x e^x dx? (by parts)`,
-          answer: "(2x - 2)e^x",
-          points: 15,
-        };
-      }
-      function generateCalculusHard6() {
-        return {
-          question: `Derivative of x^3 ln(x)? (product rule)`,
-          answer: "3x^2 ln(x) + x^2",
-          points: 15,
-        };
-      }
-      function generateCalculusHard7() {
-        return {
-          question: `Derivative of (sin(x))^2? (chain rule)`,
-          answer: "2 sin(x) cos(x)",
-          points: 15,
-        };
-      }
-      function generateCalculusHard8() {
-        return {
-          question: `Integral of (sin(x))^2 dx? (use half-angle)`,
-          answer: "x/2 - sin(2x)/4",
-          points: 15,
-        };
-      }
-      function generateCalculusHard9() {
-        return {
-          question: `Integral of 1/(x ln(x)) dx?`,
-          answer: "ln|ln(x)|",
-          points: 15,
-        };
-      }
-      function generateCalculusHard10() {
-        return {
-          question: `Derivative of (e^x)/(x^2)? (quotient rule)`,
-          answer: "(x^2 e^x - 2x e^x)/(x^4)",
-          points: 15,
-        };
-      }
-
-      // FUNCTIONS EASY (10)
-      function generateFunctionsEasy1() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)=x+1, f(${val})=?`,
-          answer: (val + 1).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy2() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)=2x, f(${val})=?`,
-          answer: (2 * val).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy3() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)=x-5, f(${val})=?`,
-          answer: (val - 5).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy4() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x/2, f(${val})=?`,
-          answer: (val / 2).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy5() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)=3, f(${val})=?`,
-          answer: "3",
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy6() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)=x^2, f(${val})=?`,
-          answer: (val * val).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy7() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= -x, f(${val})=?`,
-          answer: (-val).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy8() {
-        const val = randInt(2, 5);
-        return {
-          question: `If k(x)=2^x, k(${val})=?`,
-          answer: Math.pow(2, val).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy9() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x+1, what's f(f(${val}))?`,
-          answer: (val + 2).toString(),
-          points: 5,
-        };
-      }
-      function generateFunctionsEasy10() {
-        const val = randInt(1, 5);
-        return {
-          question: `If f(x)= x+3, g(x)= x-3, what's f(g(${val}))?`,
-          answer: val.toString(),
-          points: 5,
-        };
-      }
-
-      // FUNCTIONS MEDIUM (10)
-      function generateFunctionsMed1() {
-        const val = randInt(1, 10);
-        return {
-          question: `If g(x)=2x, f(x)=x+1, f(g(${val}))=?`,
-          answer: (2 * val + 1).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed2() {
-        const val = randInt(1, 10);
-        return {
-          question: `If h(x)= x^2, f(x)= x + 3, h(f(${val}))=?`,
-          answer: ((val + 3) * (val + 3)).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed3() {
-        const val = randInt(1, 10);
-        return {
-          question: `If p(x)= 3x, q(x)= x-1, p(q(${val}))=?`,
-          answer: (3 * (val - 1)).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed4() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x+2, g(x)= 2x, (f ∘ g)(${val})=?`,
-          answer: (2 * val + 2).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed5() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x+2, g(x)= x+3, (g ∘ f)(${val})=?`,
-          answer: (val + 5).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed6() {
-        const val = randInt(2, 5);
-        return {
-          question: `If h(x)= 2^x, f(x)= x-1, h(f(${val}))=?`,
-          answer: Math.pow(2, val - 1).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed7() {
-        const val = randInt(1, 10);
-        return {
-          question: `If r(x)= x^2 + 1, r(${val})=?`,
-          answer: (val * val + 1).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed8() {
-        const val = randInt(1, 10);
-        return {
-          question: `If r(x)= 2x+5, r(${val})=?`,
-          answer: (2 * val + 5).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed9() {
-        const val = randInt(1, 10);
-        return {
-          question: `If w(x)= x+1, w(w(${val}))=?`,
-          answer: (val + 2).toString(),
-          points: 10,
-        };
-      }
-      function generateFunctionsMed10() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= -x + 5, f(${val})=?`,
-          answer: (5 - val).toString(),
-          points: 10,
-        };
-      }
-
-      // FUNCTIONS HARD (10)
-      function generateFunctionsHard1() {
-        const val = randInt(1, 10);
-        return {
-          question: `If h(x)= x^2, f(x)= x + 1, h(f(${val}))=?`,
-          answer: ((val + 1) * (val + 1)).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard2() {
-        const val = randInt(2, 5);
-        return {
-          question: `If k(x)= 2^x, k(${val})=?`,
-          answer: Math.pow(2, val).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard3() {
-        const val = randInt(1, 5);
-        return {
-          question: `If f(x)= x^3, g(x)= x^2, (f ∘ g)(${val})=?`,
-          answer: Math.pow(val * val, 3).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard4() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x^2+2, g(x)= x+1, (f ∘ g)(${val})=?`,
-          answer: ((val + 1) * (val + 1) + 2).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard5() {
-        const val = randInt(1, 10);
-        return {
-          question: `If h(x)= x^2, j(x)= x-2, (h ∘ j)(${val})=?`,
-          answer: Math.pow(val - 2, 2).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard6() {
-        const val = randInt(2, 5);
-        return {
-          question: `If p(x)= 3^x, p(${val})=?`,
-          answer: Math.pow(3, val).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard7() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x+4, g(x)= 2x, (g ∘ f)(${val})=?`,
-          answer: (2 * (val + 4)).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard8() {
-        const val = randInt(1, 10);
-        return {
-          question: `If f(x)= x^2 - 1, f(${val})=?`,
-          answer: (val * val - 1).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard9() {
-        const val = randInt(1, 5);
-        return {
-          question: `If k(x)= 4^x, k(${val})=?`,
-          answer: Math.pow(4, val).toString(),
-          points: 15,
-        };
-      }
-      function generateFunctionsHard10() {
-        const val = randInt(1, 10);
-        return {
-          question: `If m(x)= -x^2, m(${val})=?`,
-          answer: (-(val * val)).toString(),
-          points: 15,
-        };
-      }
-
-      // NUMBERS EASY (10)
-      function generateNumbersEasy1() {
-        const primeSet = [2, 3, 5, 7, 11];
-        const pick = primeSet[randInt(0, primeSet.length - 1)];
-        return {
-          question: `Is ${pick} prime or composite?`,
-          answer: "prime",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy2() {
-        return {
-          question: `Is 1 even or odd?`,
-          answer: "odd",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy3() {
-        const n = randInt(1, 5);
-        return {
-          question: `What is ${n}+${n}?`,
-          answer: (n + n).toString(),
-          points: 5,
-        };
-      }
-      function generateNumbersEasy4() {
-        const val = randInt(1, 10);
-        return {
-          question: `Is ${val * 2} even or odd?`,
-          answer: "even",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy5() {
-        const val = randInt(1, 10);
-        return {
-          question: `Is ${val * 2 + 1} even or odd?`,
-          answer: "odd",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy6() {
-        const pick = randInt(2, 6);
-        return {
-          question: `Is ${pick} prime or composite?`,
-          answer:
-            pick === 2 || pick === 3 || pick === 5 ? "prime" : "composite",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy7() {
-        const val = randInt(1, 5);
-        return {
-          question: `Compute ${val}+${val + 1}`,
-          answer: (val + (val + 1)).toString(),
-          points: 5,
-        };
-      }
-      function generateNumbersEasy8() {
-        const val = randInt(1, 10);
-        return {
-          question: `Is ${val} positive or negative?`,
-          answer: "positive",
-          points: 5,
-        };
-      }
-      function generateNumbersEasy9() {
-        const val = randInt(-5, 5);
-        if (val === 0) {
-          return {
-            question: `Is 0 positive or negative?`,
-            answer: "0",
-            points: 5,
-          };
-        } else if (val < 0) {
-          return {
-            question: `${val} is positive or negative?`,
-            answer: "negative",
-            points: 5,
-          };
-        } else {
-          return {
-            question: `${val} is positive or negative?`,
-            answer: "positive",
-            points: 5,
-          };
-        }
-      }
-      function generateNumbersEasy10() {
-        return {
-          question: `Is 2 prime or composite?`,
-          answer: "prime",
-          points: 5,
-        };
-      }
-
-      // NUMBERS MEDIUM (10)
-      function generateNumbersMed1() {
-        const compositeSet = [4, 6, 8, 9, 10, 12, 15, 16, 18, 20];
-        const pick = compositeSet[randInt(0, compositeSet.length - 1)];
-        return {
-          question: `Is ${pick} prime or composite?`,
-          answer: "composite",
-          points: 10,
-        };
-      }
-      function generateNumbersMed2() {
-        const x = randInt(1, 10);
-        return {
-          question: `Is ${x * 2} even or odd?`,
-          answer: "even",
-          points: 10,
-        };
-      }
-      function generateNumbersMed3() {
-        const x = randInt(1, 10);
-        return {
-          question: `Is ${x * 2 + 1} even or odd?`,
-          answer: "odd",
-          points: 10,
-        };
-      }
-      function generateNumbersMed4() {
-        const n = randInt(3, 6);
-        return {
-          question: `Compute factorial(${n})`,
-          answer: factorial(n).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed5() {
-        const a = randInt(1, 10);
-        const b = randInt(1, 10);
-        return {
-          question: `Compute ${a}+${b}`,
-          answer: (a + b).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed6() {
-        const a = randInt(1, 10);
-        const b = randInt(1, 10);
-        return {
-          question: `Compute ${a}*${b}`,
-          answer: (a * b).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed7() {
-        const a = randInt(1, 10);
-        const b = randInt(1, 10);
-        return {
-          question: `Compute ${a}-${b}`,
-          answer: (a - b).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed8() {
-        const a = randInt(1, 10);
-        return {
-          question: `Compute ${a}^2`,
-          answer: (a * a).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed9() {
-        const a = randInt(2, 5);
-        const b = randInt(2, 5);
-        return {
-          question: `Compute ${a}^${b}`,
-          answer: Math.pow(a, b).toString(),
-          points: 10,
-        };
-      }
-      function generateNumbersMed10() {
-        const a = randInt(1, 5);
-        return {
-          question: `Compute 2^${a}`,
-          answer: Math.pow(2, a).toString(),
-          points: 10,
-        };
-      }
-
-      // NUMBERS HARD (10)
-      function generateNumbersHard1() {
-        return {
-          question: `What is i^2, where i is imaginary?`,
-          answer: "-1",
-          points: 15,
-        };
-      }
-      function generateNumbersHard2() {
-        const n = randInt(1, 7);
-        return {
-          question: `Compute factorial(${n})`,
-          answer: factorial(n).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard3() {
-        const a = randInt(2, 5);
-        const b = randInt(2, 5);
-        return {
-          question: `Compute ${a}^${b}`,
-          answer: Math.pow(a, b).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard4() {
-        const a = randInt(2, 5);
-        return {
-          question: `Compute 3^${a}`,
-          answer: Math.pow(3, a).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard5() {
-        const a = randInt(10, 99);
-        const b = randInt(1, 9);
-        return {
-          question: `Compute ${a}-${b}`,
-          answer: (a - b).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard6() {
-        const a = randInt(10, 99);
-        const b = randInt(1, 9);
-        return {
-          question: `Compute ${a}*${b}`,
-          answer: (a * b).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard7() {
-        const a = randInt(10, 99);
-        const b = randInt(2, 9);
-        return {
-          question: `Compute ${a}/${b} (rounded)`,
-          answer: Math.round(a / b).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard8() {
-        const a = randInt(2, 9);
-        const b = randInt(2, 5);
-        return {
-          question: `Compute log base ${a} of ${Math.pow(a, b)}`,
-          answer: b.toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard9() {
-        const a = randInt(-10, 10);
-        const b = randInt(1, 5);
-        return {
-          question: `Compute ${a}+${b}`,
-          answer: (a + b).toString(),
-          points: 15,
-        };
-      }
-      function generateNumbersHard10() {
-        return {
-          question: `What is (i)^4, where i is the imaginary unit?`,
-          answer: "1",
-          points: 15,
-        };
-      }
-      const randomGenerators = {
-        geometry: {
-          easy: [
-            generateGeometryEasy1,
-            generateGeometryEasy2,
-            generateGeometryEasy3,
-            generateGeometryEasy4,
-            generateGeometryEasy5,
-            generateGeometryEasy6,
-            generateGeometryEasy7,
-            generateGeometryEasy8,
-            generateGeometryEasy9,
-            generateGeometryEasy10,
-          ],
-          medium: [
-            generateGeometryMed1,
-            generateGeometryMed2,
-            generateGeometryMed3,
-            generateGeometryMed4,
-            generateGeometryMed5,
-            generateGeometryMed6,
-            generateGeometryMed7,
-            generateGeometryMed8,
-            generateGeometryMed9,
-            generateGeometryMed10,
-          ],
-          hard: [
-            generateGeometryHard1,
-            generateGeometryHard2,
-            generateGeometryHard3,
-            generateGeometryHard4,
-            generateGeometryHard5,
-            generateGeometryHard6,
-            generateGeometryHard7,
-            generateGeometryHard8,
-            generateGeometryHard9,
-            generateGeometryHard10,
-          ],
-        },
-        calculus: {
-          easy: [
-            generateCalculusEasy1,
-            generateCalculusEasy2,
-            generateCalculusEasy3,
-            generateCalculusEasy4,
-            generateCalculusEasy5,
-            generateCalculusEasy6,
-            generateCalculusEasy7,
-            generateCalculusEasy8,
-            generateCalculusEasy9,
-            generateCalculusEasy10,
-          ],
-          medium: [
-            generateCalculusMed1,
-            generateCalculusMed2,
-            generateCalculusMed3,
-            generateCalculusMed4,
-            generateCalculusMed5,
-            generateCalculusMed6,
-            generateCalculusMed7,
-            generateCalculusMed8,
-            generateCalculusMed9,
-            generateCalculusMed10,
-          ],
-          hard: [
-            generateCalculusHard1,
-            generateCalculusHard2,
-            generateCalculusHard3,
-            generateCalculusHard4,
-            generateCalculusHard5,
-            generateCalculusHard6,
-            generateCalculusHard7,
-            generateCalculusHard8,
-            generateCalculusHard9,
-            generateCalculusHard10,
-          ],
-        },
-        functions: {
-          easy: [
-            generateFunctionsEasy1,
-            generateFunctionsEasy2,
-            generateFunctionsEasy3,
-            generateFunctionsEasy4,
-            generateFunctionsEasy5,
-            generateFunctionsEasy6,
-            generateFunctionsEasy7,
-            generateFunctionsEasy8,
-            generateFunctionsEasy9,
-            generateFunctionsEasy10,
-          ],
-          medium: [
-            generateFunctionsMed1,
-            generateFunctionsMed2,
-            generateFunctionsMed3,
-            generateFunctionsMed4,
-            generateFunctionsMed5,
-            generateFunctionsMed6,
-            generateFunctionsMed7,
-            generateFunctionsMed8,
-            generateFunctionsMed9,
-            generateFunctionsMed10,
-          ],
-          hard: [
-            generateFunctionsHard1,
-            generateFunctionsHard2,
-            generateFunctionsHard3,
-            generateFunctionsHard4,
-            generateFunctionsHard5,
-            generateFunctionsHard6,
-            generateFunctionsHard7,
-            generateFunctionsHard8,
-            generateFunctionsHard9,
-            generateFunctionsHard10,
-          ],
-        },
-        numbers: {
-          easy: [
-            generateNumbersEasy1,
-            generateNumbersEasy2,
-            generateNumbersEasy3,
-            generateNumbersEasy4,
-            generateNumbersEasy5,
-            generateNumbersEasy6,
-            generateNumbersEasy7,
-            generateNumbersEasy8,
-            generateNumbersEasy9,
-            generateNumbersEasy10,
-          ],
-          medium: [
-            generateNumbersMed1,
-            generateNumbersMed2,
-            generateNumbersMed3,
-            generateNumbersMed4,
-            generateNumbersMed5,
-            generateNumbersMed6,
-            generateNumbersMed7,
-            generateNumbersMed8,
-            generateNumbersMed9,
-            generateNumbersMed10,
-          ],
-          hard: [
-            generateNumbersHard1,
-            generateNumbersHard2,
-            generateNumbersHard3,
-            generateNumbersHard4,
-            generateNumbersHard5,
-            generateNumbersHard6,
-            generateNumbersHard7,
-            generateNumbersHard8,
-            generateNumbersHard9,
-            generateNumbersHard10,
-          ],
-        },
-      };
-
-      function loadNextQuestion() {
-        currentQuestion = pickRandom(
-          randomGenerators[currentGame][currentDifficulty]
-        );
-        questionText.textContent = currentQuestion.question;
-        feedback.textContent = "";
-        feedback.classList.remove("correct");
-        feedback.classList.remove("incorrect");
-        coolAnimation.innerHTML = "";
-        playerAnswer.value = "";
-        questionActive = true;
-      }
-
-      const gameCards = document.querySelectorAll(".game-card");
-      gameCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          currentGame = card.getAttribute("data-game");
-          if (gamesMain) gamesMain.classList.add("hidden");
-          if (currentGame === "geometry")
-            geometryContainer.classList.remove("hidden");
-          if (currentGame === "calculus")
-            calculusContainer.classList.remove("hidden");
-          if (currentGame === "functions")
-            functionsContainer.classList.remove("hidden");
-          if (currentGame === "numbers")
-            numbersContainer.classList.remove("hidden");
-        });
-      });
-
-      const goBackBtns = document.querySelectorAll(".goBackBtn");
-      goBackBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (geometryContainer) geometryContainer.classList.add("hidden");
-          if (calculusContainer) calculusContainer.classList.add("hidden");
-          if (functionsContainer) functionsContainer.classList.add("hidden");
-          if (numbersContainer) numbersContainer.classList.add("hidden");
-          if (playContainer) playContainer.classList.add("hidden");
-          if (gamesMain) gamesMain.classList.remove("hidden");
-          playerAnswer.value = "";
-          feedback.textContent = "";
-        });
-      });
-
-      const difficultyBtns = document.querySelectorAll(".difficulty-btn");
-      difficultyBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          currentGame = btn.getAttribute("data-game");
-          currentDifficulty = btn.getAttribute("data-difficulty");
-          if (geometryContainer) geometryContainer.classList.add("hidden");
-          if (calculusContainer) calculusContainer.classList.add("hidden");
-          if (functionsContainer) functionsContainer.classList.add("hidden");
-          if (numbersContainer) numbersContainer.classList.add("hidden");
-          if (gameTitle && gameInfo && playContainer && questionText) {
-            gameTitle.textContent = `${capitalize(currentGame)} Game`;
-            gameInfo.textContent = `You selected ${currentDifficulty} difficulty for ${currentGame}.`;
-            playContainer.classList.remove("hidden");
-            loadNextQuestion();
-          }
-        });
-      });
-
-      function submitUserAnswer() {
-        if (!questionActive) return;
-        const userAnswer = playerAnswer.value.trim().toLowerCase();
-        const correctAnswer = currentQuestion.answer.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          questionActive = false;
-          totalPoints += currentQuestion.points;
-          setCookie("mathhub_points", totalPoints);
-          scoreboard.textContent = `Total Points: ${totalPoints}`;
-          feedback.textContent = `Correct! You earned ${currentQuestion.points} points.`;
-          feedback.classList.remove("incorrect");
-          feedback.classList.add("correct");
-          playGoodAnimation();
-          setTimeout(() => {
-            loadNextQuestion();
-          }, 1000);
-        } else {
-          feedback.textContent = "Incorrect. Try again!";
-          feedback.classList.remove("correct");
-          feedback.classList.add("incorrect");
-          playBadAnimation();
-        }
-      }
-
-      if (submitAnswer) {
-        submitAnswer.addEventListener("click", () => {
-          submitUserAnswer();
-        });
-      }
-
-      if (playerAnswer) {
-        playerAnswer.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            submitUserAnswer();
-          }
-        });
-      }
-
-      if (returnToDifficulty) {
-        returnToDifficulty.addEventListener("click", () => {
-          if (playContainer) playContainer.classList.add("hidden");
-          playerAnswer.value = "";
-          feedback.textContent = "";
-          feedback.classList.remove("correct");
-          feedback.classList.remove("incorrect");
-          if (currentGame === "geometry")
-            geometryContainer.classList.remove("hidden");
-          if (currentGame === "calculus")
-            calculusContainer.classList.remove("hidden");
-          if (currentGame === "functions")
-            functionsContainer.classList.remove("hidden");
-          if (currentGame === "numbers")
-            numbersContainer.classList.remove("hidden");
-        });
-      }
-
-      function playGoodAnimation() {
-        if (coolAnimation) {
-          const successBurst = document.createElement("div");
-          successBurst.classList.add("success-animation");
-          coolAnimation.innerHTML = "";
-          coolAnimation.appendChild(successBurst);
-        }
-      }
-
-      function playBadAnimation() {
-        if (coolAnimation) {
-          const failShake = document.createElement("div");
-          failShake.classList.add("fail-animation-improved");
-          coolAnimation.innerHTML = "";
-          coolAnimation.appendChild(failShake);
-        }
-      }
-    });
-  </script>
-  <script>
-    (function () {
-      var hasSecret = /(?:^|;\s*)secret_1583=([^;]+)/.test(document.cookie);
-      if (!hasSecret) return;
-
-      var target = new URL("./index.html", window.location.href).href;
-
-      if (window.location.href !== target) {
-        window.location.replace(target);
-      }
-    })();
-  </script>
 </html>
